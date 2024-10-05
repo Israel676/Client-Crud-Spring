@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        /* Basic styling */
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .create-button {
+            margin-bottom: 20px;
+        }
+
+        .create-button a {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Client List</h1>
+    <div class="create-button">
+        <a th:href="@{/clients/new}">Add New Client</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>CPF</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.cpf}">CPF</td>
+            <td th:text="${client.name}">Name</td>
+            <td th:text="${client.email}">Email</td>
+            <td th:text="${client.state}">State</td>
+            <td>
+                <a th:href="@{'/clients/edit/' + ${client.cpf}}">Edit</a> |
+                <a th:href="@{'/clients/delete/' + ${client.cpf}}"
+                   onclick="return confirm('Are you sure you want to delete this client?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
